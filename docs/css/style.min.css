@@ -1944,6 +1944,64 @@ p {
   margin-bottom: 20px;
 }
 
+.modal-window {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(47, 28, 31, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1000;
+}
+.modal-window .h3 {
+  margin-bottom: 0;
+}
+.modal-window.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-window__content {
+  width: 500px;
+  max-width: 88.533vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 323px;
+}
+.modal-window__content .section-header {
+  padding-bottom: 0;
+}
+.modal-window__content .sub-title {
+  font-weight: 700;
+}
+
+.modal-window__content-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+
 @media (min-width: 993px) {
   .possibilities__slider.slick-slider {
     display: -webkit-box !important;

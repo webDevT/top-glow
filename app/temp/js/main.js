@@ -227,6 +227,76 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 
+	// Modal window functionality
+	const modalWindow = document.querySelector('.modal-window');
+	const modalCloseBtn = document.querySelector('.modal-window__content-close');
+	
+	// Show modal function
+	function showModal() {
+		console.log('showModal called');
+		if (modalWindow) {
+			console.log('Modal window found, showing...');
+			modalWindow.classList.add('active');
+			document.body.style.overflow = 'hidden'; // Prevent background scrolling
+		} else {
+			console.log('Modal window not found');
+		}
+	}
+	
+	// Hide modal function
+	function hideModal() {
+		console.log('hideModal called');
+		if (modalWindow) {
+			modalWindow.classList.remove('active');
+			document.body.style.overflow = ''; // Restore scrolling
+		}
+	}
+	
+	// Handle form submission
+	const forms = document.querySelectorAll('.form');
+	forms.forEach(form => {
+		form.addEventListener('submit', function(e) {
+			e.preventDefault();
+			showModal();
+		});
+	});
+	
+	// Handle "Отправить" button clicks
+	const submitButtons = document.querySelectorAll('a.button');
+	submitButtons.forEach(button => {
+		if (button.textContent.trim() === 'Отправить') {
+			console.log('Found submit button:', button);
+			button.addEventListener('click', function(e) {
+				console.log('Submit button clicked');
+				e.preventDefault();
+				showModal();
+			});
+		}
+	});
+	
+	// Close modal when clicking close button
+	if (modalCloseBtn) {
+		modalCloseBtn.addEventListener('click', function() {
+			hideModal();
+		});
+	}
+	
+	// Close modal when clicking outside
+	if (modalWindow) {
+		modalWindow.addEventListener('click', function(e) {
+			if (e.target === modalWindow) {
+				hideModal();
+			}
+		});
+	}
+	
+	// Close modal with Escape key
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape' && modalWindow && modalWindow.classList.contains('active')) {
+			hideModal();
+		}
+	});
+
 	// Form page specific functionality
 	if (document.querySelector('.header--form')) {
 		// Disable mobile menu functionality for form pages
