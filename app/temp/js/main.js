@@ -19,6 +19,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	});
 
+	// Close mobile menu when clicking on header apply button
+	const headerApplyBtnMobile = document.querySelector('.header-apply-btn');
+	if (headerApplyBtnMobile) {
+		headerApplyBtnMobile.addEventListener('click', function() {
+			if (menuBtn) menuBtn.classList.remove('active');
+			if (headerNav) headerNav.classList.remove('active');
+		});
+	}
+
 	// Close mobile menu when clicking outside
 	document.addEventListener('click', function(e) {
 		if (!e.target.closest('.header')) {
@@ -158,12 +167,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// Set active navigation link based on current page
 	const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+	console.log('Current page detected:', currentPage);
 	const navLinks = document.querySelectorAll('.header__nav ul li a');
 	
 	navLinks.forEach(link => {
 		const linkHref = link.getAttribute('href');
 		if (linkHref === currentPage || (currentPage === '' && linkHref === 'index.html')) {
 			link.classList.add('active');
+		}
+	});
+
+	// Function to handle apply button behavior
+	function handleApplyButtonClick(e, currentPage) {
+		console.log('Apply button clicked, current page:', currentPage);
+		
+		// Check if we're on the home page (index.html)
+		if (currentPage === 'index.html' || currentPage === '' || currentPage === 'index') {
+			// On home page - redirect to form.html
+			console.log('On home page - redirecting to form.html');
+			e.preventDefault();
+			window.location.href = 'form.html';
+		} else {
+			// On other pages - prevent default and scroll to contact section
+			console.log('On other page - scrolling to contact section');
+			e.preventDefault();
+			
+			// Find contact section
+			const contactSection = document.querySelector('.contact-section');
+			if (contactSection) {
+				console.log('Contact section found, scrolling to it');
+				contactSection.scrollIntoView({
+					behavior: 'smooth',
+					block: 'start'
+				});
+			} else {
+				// If contact section not found, redirect to form.html
+				console.log('Contact section not found, redirecting to form.html');
+				window.location.href = 'form.html';
+			}
+		}
+	}
+
+	// Header apply button behavior based on current page
+	const headerApplyBtn = document.querySelector('.header-apply-btn');
+	if (headerApplyBtn) {
+		headerApplyBtn.addEventListener('click', function(e) {
+			handleApplyButtonClick(e, currentPage);
+		});
+	}
+
+	// Handle all "Оставить заявку" and "Начать зарабатывать" buttons on pages
+	const allButtons = document.querySelectorAll('a.button, a[href=""]');
+	allButtons.forEach(button => {
+		const buttonText = button.textContent.trim();
+		if (buttonText === 'Оставить заявку' || buttonText === 'Начать зарабатывать') {
+			button.addEventListener('click', function(e) {
+				handleApplyButtonClick(e, currentPage);
+			});
 		}
 	});
 
