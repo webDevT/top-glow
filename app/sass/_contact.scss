@@ -1,0 +1,144 @@
+@use "vars" as *;
+@use "fonts" as *;
+@use "media";
+
+.contact-section.section {
+	padding-bottom: 120px;
+}
+.contact-image {
+	width: 496px;
+	max-width: 100%;
+	margin-left: auto;
+	display: block;
+}
+.form {
+	margin-top: 30px;
+}
+.form__row {
+	display: flex;
+	justify-content: space-between;
+	.input-wrapper {
+		width: 48%;
+	}
+}
+.input-wrapper {
+	width: 100%;
+	margin-bottom: 16px;
+}
+.form__input {
+	display: block;
+	width: 100%;
+	height: 56px;
+	border-radius: 8px;
+	border: 1px solid #D5CACD;
+	padding: 0 16px;
+	outline: none;
+	color: #5F4E4E;
+
+}
+.form__input:focus,
+.form__input:not(:placeholder-shown) {
+	border: 2px solid #5F4E4E;
+	color: #5F4E4E;
+	padding-top: 15px;
+	
+	+ .input-label {
+		opacity: 1;
+	}
+}
+.form__input:focus::placeholder {
+	color: transparent;
+}
+.input-label {
+	position: absolute;
+	top: 8px;
+	left: 16px;
+	color: #5F4E4E;
+	font-size: 12px;
+	opacity: 0;
+}
+.input-wrapper {
+	position: relative;
+}
+.checkbox-row {
+	display: flex;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+.checkbox-label {
+	width: 20px;
+	min-width: 20px;
+	height: 20px;
+	border: 2px solid $primary-color;
+	display: block;
+	border-radius: 2px;
+	background: #fff;
+}
+input[type="checkbox"]:checked + .checkbox-label {
+	background-color: $primary-color;
+	background-image: url('../img/check.svg');
+	background-position: center;
+	background-size: 100%;
+}
+.checkbox-wrapper {
+	margin-right: 12px;
+	input {
+		display: none;
+	}
+}
+.checkbox-text {
+	font-size: 14px;
+	a {
+		color: $primary-color;
+	}
+}
+// Mobile styles for contact section
+@media only screen and (max-width : 992px) {
+	.contact-section.section {
+		padding-bottom: 12.8vw;
+		.h2 {
+			text-align: center;
+		}
+	}
+	.contact-image {
+		width: 100%;
+		display: block;
+		margin-top: 6.4vw;
+	}
+	.form {
+		margin-top: 6.4vw;
+	}
+	.form__row {
+		flex-direction: column;
+		.input-wrapper {
+			width: 100%;
+		}
+	}
+	.form__input {
+		height: 14.933vw;
+		input {
+			border-radius: 2.133vw;
+			padding-left: 3.2vw;
+			padding-right: 3.2vw;
+		}
+	}
+	.form__row .input-wrapper {
+		margin-bottom: 4.267vw;
+	}
+	.checkbox-row {
+		margin-top: 8.533vw;
+		margin-bottom: 8.533vw;
+	}
+	.checkbox-text {
+		font-size: 3.733vw;
+	}
+	.checkbox-label {
+		width: 5.333vw;
+		height: 5.333vw;
+		border-radius: 0.533vw;
+	}
+	.checkbox-wrapper {
+		margin-right: 3.2vw;
+	}
+}
+// end contact section styles

@@ -2,6 +2,7 @@
 @use "fonts" as *;
 @use "header";
 @use "footer";
+@use "contact";
 @use "media";
 
 
@@ -13,6 +14,7 @@ body {
 }
 p {
 	margin: 0;
+	margin-bottom: 10px;
 }
 a {
 	text-decoration: none;
@@ -62,9 +64,13 @@ a {
 	width: 239px;
 }
 .button:hover {
-	transform: scale(1.02);
 	color: #fff;
-
+	background: #FC5269;
+}
+.button:active,
+.button:focus {
+	color: #fff;
+	background: #C0162D;
 }
 //start hero style
 .hero {
@@ -436,31 +442,31 @@ a {
 }
 //end how it work section style
 
-// Desktop styles - disable Slick
-@media (min-width: 993px) {
-	.possibilities__slider.slick-slider {
-		display: flex !important;
-		flex-wrap: wrap;
-		gap: 20px;
-		justify-content: center;
-	}
-	
-	.possibilities__slider .slick-track {
-		display: flex !important;
-		flex-wrap: wrap;
-		width: 100% !important;
-		transform: none !important;
-	}
-	
-	.possibilities__slider .slick-slide {
-		width: calc(50% - 10px) !important;
-		min-width: 300px !important;
-		height: 200px !important;
-		margin: 0 !important;
-	}
-	
+//start about section
+.about-item .how-it-work__item-icon {
+	margin-bottom: 12px;
 }
-//end possibilities section
+.about-item {
+	margin-top: 20px;
+	margin-bottom: 25px;
+}
+.about-section .button-wrapper {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+.about-image {
+	width: 100%;
+	height: 600px;
+	object-fit: cover;
+	object-position: center;
+	display: block;
+	margin-top: 53px;
+	border-radius: 16px;
+}
+//end about section
+
+
 
 //start section header
 .sub-title {
@@ -734,6 +740,73 @@ p {
 	margin-bottom: 32px;
 }
 //end items section style
+
+//start advantages section
+.advantages__list {
+	border-top: 1px solid #EFEAEA;
+	.how-it-work__item-icon {
+		margin-bottom: 24px;
+	}
+	.col-lg-6 {
+		border-bottom: 1px solid #EFEAEA;
+	}
+	.advantages__item {
+		padding-bottom: 24px;
+		padding-top: 24px;
+	}
+	.button {
+		margin-top: 48px;
+	}
+}
+
+//end advantages section
+
+//start contact page
+.contact__item a {
+	display: flex;
+	align-items: center;
+	font-size: 30px;
+	color: #2F1C1F;
+	font-family: $font-secondary;
+	font-weight: 500;
+	.how-it-work__item-icon {
+		margin-bottom: 0;
+		margin-right: 16px;
+	}
+}
+.contact-page .col-lg-6 {
+	border-top: 1px solid #EFEAEA;
+	border-bottom: 1px solid #EFEAEA;
+	padding-top: 24px;
+	padding-bottom: 24px;
+}
+//end contact page
+
+// Desktop styles - disable Slick
+@media (min-width: 993px) {
+	.possibilities__slider.slick-slider {
+		display: flex !important;
+		flex-wrap: wrap;
+		gap: 20px;
+		justify-content: center;
+	}
+	
+	.possibilities__slider .slick-track {
+		display: flex !important;
+		flex-wrap: wrap;
+		width: 100% !important;
+		transform: none !important;
+	}
+	
+	.possibilities__slider .slick-slide {
+		width: calc(50% - 10px) !important;
+		min-width: 300px !important;
+		height: 200px !important;
+		margin: 0 !important;
+	}
+	
+}
+//end possibilities section
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1260px) {
@@ -1016,12 +1089,14 @@ p {
 	}
 	.how-it-work__item-icon {
 		width: 14.93vw;
+		min-width: 14.93vw;
 		height: 14.93vw;
 		border-radius: 2.49vw;
 	}
 	.how-it-work__item-icon img {
 		width: 8.8vw;
 		max-width: 8.8vw;
+		max-height: 8.8vw;
 	}
 	.how-it-work__item p {
 		width: 55.2vw;
@@ -1162,6 +1237,55 @@ p {
 	.footer__bottom-content {
 		padding-bottom: 12.27vw;
 	}
+	.about-section {
+		text-align: center;
+		.how-it-work__item-icon {
+			margin-left: auto;
+			margin-right: auto;
+		}
+		p {
+			margin-bottom: 2.67vw;
+		}
+		.button-wrapper {
+			margin-top: 5vw;
+		}
+	}
+	.about-image {
+		margin-top: 12.8vw;
+		height: 48vw;
+		border-radius: 4.27vw;
+	}
+	.advantages__list .advantages__item {
+		padding-top: 6.4vw;
+		padding-bottom: 6.4vw;
+	}
+	.advantages-section.section {
+		padding-bottom: 0;
+	}
+	.contact__item a .how-it-work__item-icon {
+		margin-right: 3.2vw;
+	}
+	.contact__item-text {
+		font-size: 5.8vw;
+	}
+	.contact-page .col-lg-6 {
+		padding-top: 6.4vw;
+		padding-bottom: 6.4vw;
+	}
+	.how-it-work__item-icon {
+		width: 8.533vw;
+		min-width: 8.533vw;
+		height: 8.533vw;
+		img {
+			width: 5.067vw;
+		}
+	}
+	.input-label {
+		font-size: 3.2vw;
+	}
+	
+
+	
 	
 }
 
