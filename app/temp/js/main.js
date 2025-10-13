@@ -443,7 +443,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// Hero Slider (Slick) functionality
 	$(document).ready(function() {
-		$('.hero-slider').slick({
+		// Use requestAnimationFrame to avoid forced reflow during slider initialization
+		requestAnimationFrame(() => {
+			$('.hero-slider').slick({
 			dots: true,
 			infinite: true,
 			speed: 500,
@@ -464,6 +466,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				}
 			]
 		});
+		});
 	});
 	
 	// Initialize possibilities slider
@@ -475,7 +478,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			slider.slick('destroy');
 		}
 		
-		if (window.innerWidth <= 992) {
+		// Use requestAnimationFrame to avoid forced reflow
+		requestAnimationFrame(() => {
+			if (window.innerWidth <= 992) {
 			// Initialize Slick slider on mobile
 			slider.slick({
 				dots: false,
@@ -498,15 +503,21 @@ document.addEventListener('DOMContentLoaded', function() {
 				]
 			});
 		}
+		});
 	}
 	
 	// Initialize on page load
 	initPossibilitiesSlider();
 	
 	// Check on window resize
+	let resizeTimeout;
 	window.addEventListener('resize', function() {
-		// Delay for stability
-		setTimeout(initPossibilitiesSlider, 100);
+		// Clear previous timeout
+		clearTimeout(resizeTimeout);
+		// Use requestAnimationFrame to avoid forced reflow
+		requestAnimationFrame(() => {
+			resizeTimeout = setTimeout(initPossibilitiesSlider, 100);
+		});
 	});
 
 	// Global variable for YouTube player
