@@ -299,48 +299,53 @@
 					</h2>
 		
 
-				<form action="" class="form">
+				<form id="contactForm" class="form" novalidate>
 					<div class="form__row">
 
 						<div class="input-wrapper">
-							
-							<input type="text" placeholder="Имя" class="form__input"><div class="input-label">
+							<input type="text" name="name" placeholder="Имя" class="form__input" required>
+							<div class="input-label">
 								Имя
 							</div>
+							<div class="error-message" id="name-error"></div>
 						</div>
 
 						<div class="input-wrapper">
-							<input type="text" placeholder="Электронная почта" class="form__input">
+							<input type="email" name="email" placeholder="Электронная почта" class="form__input" required>
 							<div class="input-label">
 								Электронная почта
 							</div>
+							<div class="error-message" id="email-error"></div>
 						</div>								
 					</div>
 
 					<div class="input-wrapper">
-						<input type="text" placeholder="Instagram Username" class="form__input">
+						<input type="text" name="instagram" placeholder="Instagram Username" class="form__input" required>
 						<div class="input-label">
 							Instagram Username
 						</div>
+						<div class="error-message" id="instagram-error"></div>
 					</div>
 
 					<div class="checkbox-row">
 						<div class="checkbox-wrapper">
-							<input type="checkbox" id="checkbox" class="form__checkbox">
+							<input type="checkbox" id="checkbox" name="privacy" class="form__checkbox" required>
 							<label for="checkbox" class="checkbox-label"></label>
 						</div>
 						<div class="checkbox-text">
 							Я даю согласие на обработку персональных данных и подтверждаю, что ознакомлен(а) с <a href="">политикой конфиденциальности</a>.
 						</div>
+						<div class="error-message" id="privacy-error"></div>
 					</div>
 
 					<div class="button-wrapper">
-						<a href="" class="button">
-						Отправить
-					</a>
-					<div class="button-text">
-						🔒 100% ĸонфиденциально
-					</div>
+						<button type="submit" class="button" id="submitBtn">
+							<span class="btn-text">Отправить</span>
+							<span class="btn-loading" style="display: none;">Отправка...</span>
+						</button>
+						<div class="button-text">
+							🔒 100% ĸонфиденциально
+						</div>
 					</div>
 				</form>
 			</div>

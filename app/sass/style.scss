@@ -1414,6 +1414,31 @@ p {
 
 
 
+// Form validation styles
+.error-message {
+	color: #ff4444;
+	font-size: 12px;
+	margin-top: 5px;
+	display: none;
+	
+	&.show {
+		display: block;
+	}
+}
+
+.form__input.error {
+	border-color: #ff4444;
+}
+
+.form__checkbox.error + .checkbox-label {
+	border-color: #ff4444;
+}
+
+.button:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 768px) {
 	/**/

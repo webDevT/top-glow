@@ -252,14 +252,140 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 	
-	// Handle form submission
-	const forms = document.querySelectorAll('.form');
-	forms.forEach(form => {
-		form.addEventListener('submit', function(e) {
+	// Form validation and submission
+	const contactForm = document.getElementById('contactForm');
+	if (contactForm) {
+		contactForm.addEventListener('submit', function(e) {
 			e.preventDefault();
-			showModal();
+			
+			// Clear previous errors
+			clearErrors();
+			
+			// Validate form
+			if (validateForm()) {
+				submitForm();
+			}
 		});
-	});
+	}
+	
+	// Form validation function
+	function validateForm() {
+		let isValid = true;
+		
+		// Validate name
+		const nameInput = contactForm.querySelector('input[name="name"]');
+		if (!nameInput.value.trim()) {
+			showError('name-error', 'Пожалуйста, введите ваше имя');
+			nameInput.classList.add('error');
+			isValid = false;
+		}
+		
+		// Validate email
+		const emailInput = contactForm.querySelector('input[name="email"]');
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (!emailInput.value.trim()) {
+			showError('email-error', 'Пожалуйста, введите email');
+			emailInput.classList.add('error');
+			isValid = false;
+		} else if (!emailRegex.test(emailInput.value)) {
+			showError('email-error', 'Пожалуйста, введите корректный email');
+			emailInput.classList.add('error');
+			isValid = false;
+		}
+		
+		// Validate Instagram
+		const instagramInput = contactForm.querySelector('input[name="instagram"]');
+		if (!instagramInput.value.trim()) {
+			showError('instagram-error', 'Пожалуйста, введите Instagram username');
+			instagramInput.classList.add('error');
+			isValid = false;
+		}
+		
+		// Validate privacy checkbox
+		const privacyCheckbox = contactForm.querySelector('input[name="privacy"]');
+		if (!privacyCheckbox.checked) {
+			showError('privacy-error', 'Необходимо согласиться с политикой конфиденциальности');
+			privacyCheckbox.classList.add('error');
+			isValid = false;
+		}
+		
+		return isValid;
+	}
+	
+	// Show error message
+	function showError(errorId, message) {
+		const errorElement = document.getElementById(errorId);
+		if (errorElement) {
+			errorElement.textContent = message;
+			errorElement.classList.add('show');
+		}
+	}
+	
+	// Clear all errors
+	function clearErrors() {
+		const errorElements = document.querySelectorAll('.error-message');
+		errorElements.forEach(error => {
+			error.classList.remove('show');
+			error.textContent = '';
+		});
+		
+		const errorInputs = document.querySelectorAll('.form__input.error, .form__checkbox.error');
+		errorInputs.forEach(input => {
+			input.classList.remove('error');
+		});
+	}
+	
+	// Submit form to Google Sheets
+	function submitForm() {
+		const submitBtn = document.getElementById('submitBtn');
+		const btnText = submitBtn.querySelector('.btn-text');
+		const btnLoading = submitBtn.querySelector('.btn-loading');
+		
+		// Show loading state
+		submitBtn.disabled = true;
+		btnText.style.display = 'none';
+		btnLoading.style.display = 'inline';
+		
+		// Get form data
+		const formData = new FormData(contactForm);
+		const data = {
+			name: formData.get('name'),
+			email: formData.get('email'),
+			instagram: formData.get('instagram'),
+			privacy: formData.get('privacy') ? 'Да' : 'Нет',
+			timestamp: new Date().toLocaleString('ru-RU')
+		};
+		
+		// Google Apps Script URL (замініть на ваш URL)
+		const scriptURL = 'https://script.google.com/macros/s/AKfycbwMDMip5dpyFCzcEJcsyAFPP7KLYQN6IIJt2EsU0K-CoNNGcEje8O5sRq5V37EsAR469A/exec';
+		
+		// Send data to Google Sheets
+		fetch(scriptURL, {
+			method: 'POST',
+			mode: 'no-cors',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data)
+		})
+		.then(() => {
+			// Show success modal
+			showModal();
+			// Reset form
+			contactForm.reset();
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+			// Show error message
+			showError('privacy-error', 'Произошла ошибка при отправке. Попробуйте еще раз.');
+		})
+		.finally(() => {
+			// Hide loading state
+			submitBtn.disabled = false;
+			btnText.style.display = 'inline';
+			btnLoading.style.display = 'none';
+		});
+	}
 	
 	// Handle "Отправить" button clicks
 	const submitButtons = document.querySelectorAll('a.button');
