@@ -1,3 +1,14 @@
+# Add MIME types for better caching
+<IfModule mod_mime.c>
+    AddType application/javascript .js
+    AddType text/css .css
+    AddType image/svg+xml .svg
+    AddType font/woff .woff
+    AddType font/woff2 .woff2
+    AddType application/font-woff .woff
+    AddType application/font-woff2 .woff2
+</IfModule>
+
 # Enable compression
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
@@ -10,6 +21,8 @@
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
     AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE font/woff
+    AddOutputFilterByType DEFLATE font/woff2
 </IfModule>
 
 # Enable browser caching
@@ -52,22 +65,31 @@
     # CSS and JS files - cache for 1 year
     <FilesMatch "\.(css|js)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
+        Header set ETag ""
+        Header unset Last-Modified
     </FilesMatch>
     
     # Images - cache for 1 year
     <FilesMatch "\.(png|jpg|jpeg|gif|svg|webp|ico)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
+        Header set ETag ""
+        Header unset Last-Modified
     </FilesMatch>
     
     # Fonts - cache for 1 year
     <FilesMatch "\.(woff|woff2|ttf|eot)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
+        Header set ETag ""
+        Header unset Last-Modified
     </FilesMatch>
     
     # HTML files - cache for 1 hour
     <FilesMatch "\.html$">
         Header set Cache-Control "public, max-age=3600"
     </FilesMatch>
+    
+    # Add Vary header for better caching
+    Header set Vary "Accept-Encoding"
 </IfModule>
 
 # Security headers
