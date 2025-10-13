@@ -12,6 +12,9 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="preconnect" href="https://stackpath.bootstrapcdn.com">
 	<link rel="preconnect" href="https://www.youtube.com">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="dns-prefetch" href="//stackpath.bootstrapcdn.com">
 	
 	<!-- Preload critical resources -->
 	<link rel="preload" href="css/style.min.css" as="style">
@@ -25,31 +28,46 @@
 	<link rel="stylesheet" href="css/libs.min.css?v=1.0.0">
 	<link rel="stylesheet" href="css/style.min.css?v=1.0.0">
 	
-	<!-- Lazy loading styles -->
+	<!-- Critical CSS for LCP optimization -->
 	<style>
+		/* Optimize slider for LCP - show first slide immediately before Slick initializes */
+		.hero-slider:not(.slick-initialized) .hero-slider__slide:first-child {
+			display: block !important;
+			opacity: 1;
+		}
+		.hero-slider:not(.slick-initialized) .hero-slider__slide:not(:first-child) {
+			display: none;
+		}
+		
+		/* Ensure LCP image loads immediately */
+		.hero-slider__image {
+			will-change: transform;
+			transform: translateZ(0);
+		}
+		
+		/* Lazy loading styles */
 		img[data-src] {
 			opacity: 0;
 			transition: opacity 0.3s ease;
+			background: #f0f0f0;
+			min-height: 200px;
 		}
 		img[data-src].loaded {
 			opacity: 1;
 		}
-		/* Placeholder for lazy images */
-		img[data-src] {
-			background: #f0f0f0;
-			min-height: 200px;
-		}
 		
-		/* Ensure LCP image is visible before slider initialization */
-		.hero-slider__slide:first-child {
-			display: block !important;
+		/* Font optimization */
+		@font-face {
+			font-family: 'Inter';
+			font-display: swap;
 		}
-		.hero-slider__slide:not(:first-child) {
-			display: none;
+		@font-face {
+			font-family: 'Manrope';
+			font-display: swap;
 		}
-		/* Show all slides after slider is initialized */
-		.hero-slider.slick-initialized .hero-slider__slide {
-			display: block;
+		@font-face {
+			font-family: 'Mulish';
+			font-display: swap;
 		}
 	</style>
 	
