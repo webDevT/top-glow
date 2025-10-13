@@ -7,16 +7,25 @@
 	<title>Top Glow</title>
 	<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 	
-	<!-- Preconnect to critical external domains -->
+	<!-- Preconnect to external domains -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://stackpath.bootstrapcdn.com">
+	<link rel="preconnect" href="https://www.youtube.com">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="dns-prefetch" href="//stackpath.bootstrapcdn.com">
 	
-	<!-- Preload only the most critical resources -->
+	<!-- Preload critical resources -->
+	<link rel="preload" href="css/libs.min.css" as="style">
+	<link rel="preload" href="css/style.min.css" as="style">
+	<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Mulish:wght@300;400;500;600;700&display=swap" as="style">
 	<link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="https://fonts.gstatic.com/s/manrope/v15/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk59FO_F87jxeN7.woff2" as="font" type="font/woff2" crossorigin>
 	
-	<!-- Preload LCP image - only the most critical one -->
+	<!-- Preload LCP images -->
 	<link rel="preload" href="img/photo1.webp" as="image" fetchpriority="high">
+	<link rel="preload" href="img/slider-image.png" as="image" fetchpriority="high">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/libs.min.css?v=1.0.0">
@@ -198,8 +207,8 @@
 					<div class="hero-slider">
 						<div class="hero-slider__slide">
 							<picture>
-								<source srcset="img/photo1.webp" type="image/webp" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw">
-								<img src="img/photo1.png" alt="Photo 1" class="hero-slider__image" fetchpriority="high" loading="eager" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw">
+								<source srcset="img/photo1.webp" type="image/webp">
+								<img src="img/photo1.png" alt="Photo 1" class="hero-slider__image" fetchpriority="high" loading="eager">
 							</picture>
 						</div>
 						<div class="hero-slider__slide">
