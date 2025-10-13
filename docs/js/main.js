@@ -237,7 +237,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		if (modalWindow) {
 			console.log('Modal window found, showing...');
 			modalWindow.classList.add('active');
-			document.body.style.overflow = 'hidden'; // Prevent background scrolling
+			// Use requestAnimationFrame to avoid forced reflow
+			requestAnimationFrame(() => {
+				document.body.style.overflow = 'hidden'; // Prevent background scrolling
+			});
 		} else {
 			console.log('Modal window not found');
 		}
@@ -248,7 +251,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		console.log('hideModal called');
 		if (modalWindow) {
 			modalWindow.classList.remove('active');
-			document.body.style.overflow = ''; // Restore scrolling
+			// Use requestAnimationFrame to avoid forced reflow
+			requestAnimationFrame(() => {
+				document.body.style.overflow = ''; // Restore scrolling
+			});
 		}
 	}
 	
@@ -343,8 +349,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 		// Show loading state
 		submitBtn.disabled = true;
-		btnText.style.display = 'none';
-		btnLoading.style.display = 'inline';
+		// Use requestAnimationFrame to batch style changes
+		requestAnimationFrame(() => {
+			btnText.style.display = 'none';
+			btnLoading.style.display = 'inline';
+		});
 		
 		// Get form data
 		const formData = new FormData(contactForm);
@@ -382,8 +391,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		.finally(() => {
 			// Hide loading state
 			submitBtn.disabled = false;
-			btnText.style.display = 'inline';
-			btnLoading.style.display = 'none';
+			// Use requestAnimationFrame to batch style changes
+			requestAnimationFrame(() => {
+				btnText.style.display = 'inline';
+				btnLoading.style.display = 'none';
+			});
 		});
 	}
 	
