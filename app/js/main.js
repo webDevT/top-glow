@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 
-	// Handle all "Оставить заявку" and "Начать зарабатывать" buttons on pages
+	// Handle all apply and start earning buttons on pages
 	const allButtons = document.querySelectorAll('a.button, a[href=""]');
 	allButtons.forEach(button => {
 		const buttonText = button.textContent.trim();
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			timestamp: new Date().toLocaleString('ru-RU')
 		};
 		
-		// Google Apps Script URL (замініть на ваш URL)
+		// Google Apps Script URL (replace with your URL)
 		const scriptURL = 'https://script.google.com/macros/s/AKfycbwMDMip5dpyFCzcEJcsyAFPP7KLYQN6IIJt2EsU0K-CoNNGcEje8O5sRq5V37EsAR469A/exec';
 		
 		// Send data to Google Sheets
@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 	
-	// Handle "Отправить" button clicks
+	// Handle submit button clicks
 	const submitButtons = document.querySelectorAll('a.button');
 	submitButtons.forEach(button => {
 		if (button.textContent.trim() === 'Отправить') {
