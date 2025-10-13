@@ -6,13 +6,69 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Top Glow</title>
 	<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+	
+	<!-- Preconnect to external domains -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://stackpath.bootstrapcdn.com">
+	<link rel="preconnect" href="https://www.youtube.com">
+	
+	<!-- Preload critical resources -->
+	<link rel="preload" href="css/style.min.css" as="style">
+	<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Mulish:wght@300;400;500;600;700&display=swap" as="style">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/libs.min.css">
 	<link rel="stylesheet" href="css/style.min.css">
-	<script src="https://www.youtube.com/iframe_api"></script>
+	
+	<!-- Lazy loading styles -->
+	<style>
+		img[data-src] {
+			opacity: 0;
+			transition: opacity 0.3s ease;
+		}
+		img[data-src].loaded {
+			opacity: 1;
+		}
+		/* Placeholder for lazy images */
+		img[data-src] {
+			background: #f0f0f0;
+			min-height: 200px;
+		}
+	</style>
+	
+	<!-- Lazy loading script for images -->
+	<script>
+		// Simple lazy loading implementation
+		function lazyLoadImages() {
+			const images = document.querySelectorAll('img[data-src]');
+			if (images.length === 0) return;
+			
+			const imageObserver = new IntersectionObserver((entries, observer) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const img = entry.target;
+						img.src = img.dataset.src;
+						img.classList.add('loaded');
+						img.removeAttribute('data-src');
+						observer.unobserve(img);
+					}
+				});
+			}, {
+				rootMargin: '50px 0px', // Start loading 50px before image comes into view
+				threshold: 0.01
+			});
+			
+			images.forEach(img => imageObserver.observe(img));
+		}
+		
+		// Initialize lazy loading when DOM is ready
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', lazyLoadImages);
+		} else {
+			lazyLoadImages();
+		}
+	</script>
 </head>
 <body>
 
@@ -338,6 +394,42 @@
 	
 	</footer>
 
+	
+	<!-- Load YouTube API asynchronously when needed -->
+	<script>
+		// Load YouTube API asynchronously when video section is visible
+		function loadYouTubeAPI() {
+			const script = document.createElement('script');
+			script.src = 'https://www.youtube.com/iframe_api';
+			script.async = true;
+			document.head.appendChild(script);
+		}
+		
+		// Load YouTube API when video section comes into view
+		if ('IntersectionObserver' in window) {
+			const videoObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						loadYouTubeAPI();
+						videoObserver.disconnect(); // Load only once
+					}
+				});
+			}, {
+				rootMargin: '100px 0px' // Start loading 100px before video section is visible
+			});
+			
+			// Observe video section when DOM is ready
+			document.addEventListener('DOMContentLoaded', () => {
+				const videoSection = document.querySelector('.video-section');
+				if (videoSection) {
+					videoObserver.observe(videoSection);
+				}
+			});
+		} else {
+			// Fallback for older browsers - load immediately
+			document.addEventListener('DOMContentLoaded', loadYouTubeAPI);
+		}
+	</script>
 	
 	<script src="js/libs.min.js"></script>
 	<script src="js/main.js"></script>

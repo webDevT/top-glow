@@ -75,6 +75,42 @@
 	</footer>
 
 	
+	<!-- Load YouTube API asynchronously when needed -->
+	<script>
+		// Load YouTube API asynchronously when video section is visible
+		function loadYouTubeAPI() {
+			const script = document.createElement('script');
+			script.src = 'https://www.youtube.com/iframe_api';
+			script.async = true;
+			document.head.appendChild(script);
+		}
+		
+		// Load YouTube API when video section comes into view
+		if ('IntersectionObserver' in window) {
+			const videoObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						loadYouTubeAPI();
+						videoObserver.disconnect(); // Load only once
+					}
+				});
+			}, {
+				rootMargin: '100px 0px' // Start loading 100px before video section is visible
+			});
+			
+			// Observe video section when DOM is ready
+			document.addEventListener('DOMContentLoaded', () => {
+				const videoSection = document.querySelector('.video-section');
+				if (videoSection) {
+					videoObserver.observe(videoSection);
+				}
+			});
+		} else {
+			// Fallback for older browsers - load immediately
+			document.addEventListener('DOMContentLoaded', loadYouTubeAPI);
+		}
+	</script>
+	
 	<script src="js/libs.min.js"></script>
 	<script src="js/main.js"></script>
 </body>
