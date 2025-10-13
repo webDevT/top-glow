@@ -16,6 +16,10 @@
 	<!-- Preload critical resources -->
 	<link rel="preload" href="css/style.min.css" as="style">
 	<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Mulish:wght@300;400;500;600;700&display=swap" as="style">
+	
+	<!-- Preload LCP images -->
+	<link rel="preload" href="img/photo1.png" as="image" fetchpriority="high">
+	<link rel="preload" href="img/slider-image.png" as="image" fetchpriority="high">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/libs.min.css">
@@ -34,6 +38,18 @@
 		img[data-src] {
 			background: #f0f0f0;
 			min-height: 200px;
+		}
+		
+		/* Ensure LCP image is visible before slider initialization */
+		.hero-slider__slide:first-child {
+			display: block !important;
+		}
+		.hero-slider__slide:not(:first-child) {
+			display: none;
+		}
+		/* Show all slides after slider is initialized */
+		.hero-slider.slick-initialized .hero-slider__slide {
+			display: block;
 		}
 	</style>
 	
@@ -169,7 +185,7 @@
 				<div class="hero-slide-wrapper">
 					<div class="hero-slider">
 						<div class="hero-slider__slide">
-							<img src="img/photo1.png" alt="Photo 1" class="hero-slider__image">
+							<img src="img/photo1.png" alt="Photo 1" class="hero-slider__image" fetchpriority="high" loading="eager">
 						</div>
 						<div class="hero-slider__slide">
 							<img src="img/photo2.png" alt="Photo 2" class="hero-slider__image">
@@ -198,7 +214,7 @@
 					</div>
 
 					<div class="slider-image">
-						<img src="img/slider-image.png" alt="Slider Image">
+						<img src="img/slider-image.png" alt="Slider Image" fetchpriority="high" loading="eager">
 					</div>
 				</div>
 				<div class="hero-text">
