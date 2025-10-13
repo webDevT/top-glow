@@ -2545,6 +2545,10 @@ p {
   cursor: not-allowed;
 }
 
+.button[type=submit] {
+  outline: none;
+}
+
 /* Large Devices, Wide Screens */
 @media only screen and (max-width: 768px) {
   /**/
