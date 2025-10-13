@@ -456,6 +456,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			prevArrow: false,
 			fade: true,
 			nextArrow: $('.next-button'),
+			accessibility: true,
+			adaptiveHeight: false,
 			responsive: [
 				{
 					breakpoint: 768,
@@ -466,6 +468,18 @@ document.addEventListener('DOMContentLoaded', function() {
 				}
 			]
 		});
+		
+		// Fix accessibility issues after slider initialization
+		$('.hero-slider').on('afterChange', function(event, slick, currentSlide) {
+			// Remove tabindex from hidden slides
+			$('.hero-slider .slick-slide[aria-hidden="true"]').attr('tabindex', '-1');
+			// Ensure active slide is focusable
+			$('.hero-slider .slick-slide[aria-hidden="false"]').attr('tabindex', '0');
+		});
+		
+		// Initial accessibility fix
+		$('.hero-slider .slick-slide[aria-hidden="true"]').attr('tabindex', '-1');
+		$('.hero-slider .slick-slide[aria-hidden="false"]').attr('tabindex', '0');
 		});
 	});
 	
@@ -491,6 +505,8 @@ document.addEventListener('DOMContentLoaded', function() {
 				slidesToScroll: 1,
 				centerMode: false,
 				variableWidth: false,
+				accessibility: true,
+				adaptiveHeight: false,
 				responsive: [
 					{
 						breakpoint: 992,
@@ -502,6 +518,18 @@ document.addEventListener('DOMContentLoaded', function() {
 					}
 				]
 			});
+			
+			// Fix accessibility issues for possibilities slider
+			slider.on('afterChange', function(event, slick, currentSlide) {
+				// Remove tabindex from hidden slides
+				$('.possibilities__slider .slick-slide[aria-hidden="true"]').attr('tabindex', '-1');
+				// Ensure active slide is focusable
+				$('.possibilities__slider .slick-slide[aria-hidden="false"]').attr('tabindex', '0');
+			});
+			
+			// Initial accessibility fix for possibilities slider
+			$('.possibilities__slider .slick-slide[aria-hidden="true"]').attr('tabindex', '-1');
+			$('.possibilities__slider .slick-slide[aria-hidden="false"]').attr('tabindex', '0');
 		}
 		});
 	}
