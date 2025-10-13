@@ -70,8 +70,10 @@ const compileJS = () => {
 
 // Copy static assets
 const copyAssets = () => {
-    return gulp.src(['app/css/**/*', 'app/js/**/*', 'app/fonts/**/*'], { base: 'app' })
+    const copyFiles = gulp.src(['app/css/**/*', 'app/js/**/*', 'app/fonts/**/*'], { base: 'app' })
         .pipe(gulp.dest('app/temp/'));
+    
+    return copyFiles;
 };
 
 // Copy images separately without processing
@@ -123,7 +125,7 @@ const watch = () => {
     gulp.watch('app/img/**/*', copyImages);
 };
 
-// Export task for production build
+// Export task for production build with caching
 const exportBuild = () => {
     const buildHtml = gulp.src('app/src/*.html')
         .pipe(fileinclude({
@@ -141,10 +143,14 @@ const exportBuild = () => {
     const buildFonts = gulp.src('app/fonts/**/*.*')
         .pipe(gulp.dest('docs/fonts'));
 
-    // Використовуємо окрему функцію для копіювання зображень
+    // Copy images
     const buildImg = copyImagesProd();
 
-    return Promise.all([buildHtml, buildCss, buildJs, buildFonts, buildImg]);
+    // Copy .htaccess file
+    const buildHtaccess = gulp.src('.htaccess', { allowEmpty: true })
+        .pipe(gulp.dest('docs'));
+
+    return Promise.all([buildHtml, buildCss, buildJs, buildFonts, buildImg, buildHtaccess]);
 };
 
 // Build task
