@@ -19,6 +19,8 @@
 	<!-- Preload critical resources -->
 	<link rel="preload" href="css/style.min.css" as="style">
 	<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Mulish:wght@300;400;500;600;700&display=swap" as="style">
+	<link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="https://fonts.gstatic.com/s/manrope/v15/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk59FO_F87jxeN7.woff2" as="font" type="font/woff2" crossorigin>
 	
 	<!-- Preload LCP images -->
 	<link rel="preload" href="img/photo1.webp" as="image" fetchpriority="high">
@@ -28,9 +30,9 @@
 	<link rel="stylesheet" href="css/libs.min.css?v=1.0.0">
 	<link rel="stylesheet" href="css/style.min.css?v=1.0.0">
 	
-	<!-- Critical CSS for LCP optimization -->
+	<!-- Critical CSS for LCP optimization only -->
 	<style>
-		/* Optimize slider for LCP - show first slide immediately before Slick initializes */
+		/* Show first slide immediately for LCP before Slick initializes */
 		.hero-slider:not(.slick-initialized) .hero-slider__slide:first-child {
 			display: block !important;
 			opacity: 1;
