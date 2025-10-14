@@ -7,6 +7,11 @@
     padding-bottom: 20px;
     font-family: $font-primary;
     border-bottom: 1px solid #F2F2F2;
+    position: fixed;
+    width: 100%;
+    background: #fff;
+    z-index: 1000;
+    top: 0;
     
     &--form {
         .container-fluid {
@@ -250,7 +255,9 @@
         font-size: 4.27vw;
         line-height: 1;
         padding: 3.3vw 5vw;
+        border-radius: 26.67vw;
     }
+    
     .language-toggle {
         padding: 1vw 1vw;
     }
@@ -290,7 +297,7 @@
         transition: all 0.3s ease;
         border-top: 1px solid #F2F2F2;
         background: #fff;
-        height: 98vh;
+        height: 88vh;
         overflow-y: auto;
         box-sizing: border-box;
         
@@ -340,7 +347,7 @@
         align-items: center;
     }
     .mobile-header-footer {
-        padding-bottom: 4.8vw;
+        padding-bottom: 20vw;
     }
     .header__social {
         padding-top: 18px;
@@ -386,5 +393,8 @@
     }
     .button-text {
         font-size: 3.2vw;
+    }
+    .header {
+        position: static;
     }
 }

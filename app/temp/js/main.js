@@ -511,9 +511,9 @@ document.addEventListener('DOMContentLoaded', function() {
 					{
 						breakpoint: 992,
 						settings: {
-							slidesToShow: 1.1,
+							slidesToShow: 1.19,
 							centerMode: false,
-							centerPadding: '0px'
+							centerPadding: '0vw'
 						}
 					}
 				]
